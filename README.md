@@ -47,3 +47,32 @@ It includes:
 ---
 
 ## ⚙️ Project Structure
+Loan-Default-Project/
+│
+├── data/
+│   └── Loan_Default.csv
+│
+├── src/
+│   ├── ingest.py
+│   ├── preprocess.py
+│   ├── train.py
+│   ├── evaluate.py
+│
+├── api/
+│   └── app.py
+│
+├── models/
+│   ├── model.pkl
+│   ├── scaler.pkl
+│   ├── encoders.pkl
+│
+├── MLworkflow/
+│   └── mlflow_script.py
+│
+├── mlruns/                 ✅ (auto-created by MLflow)
+│
+├── venv/                   ✅ (your virtual environment)
+│
+├── requirements.txt        ✅ (frozen dependencies)
+│
+├── README.md               ✅ (GitHub documentation)
