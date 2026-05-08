@@ -1,0 +1,14 @@
+artifact_uri: file:///home/AbhijeetKr67/Loan-Default-Project/mlruns/0/f4dd33d2d6944b5db50a96e495d7d817/artifacts
+end_time: 1778275566227
+entry_point_name: ''
+experiment_id: '0'
+lifecycle_stage: active
+run_id: f4dd33d2d6944b5db50a96e495d7d817
+run_name: wistful-hound-714
+source_name: ''
+source_type: 4
+source_version: ''
+start_time: 1778275564172
+status: 3
+tags: []
+user_id: AbhijeetKr67
