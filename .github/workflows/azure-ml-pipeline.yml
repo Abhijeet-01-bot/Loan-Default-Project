@@ -1,0 +1,31 @@
+name: Azure ML Pipeline
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout Repo
+        uses: actions/checkout@v4
+
+      - name: Setup Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.13.5"
+
+      - name: Install Requirements
+        run: pip install -r requirements.txt
+
+      - name: Run Azure Setup
+        run: python 01_setup_azure.py
+
+      - name: Train Model
+        run: python 02_train_register.py
+
+      - name: Deploy Model
+        run: python 03_deploy.py
