@@ -1,0 +1,9 @@
+Loan_Default.csv
+outputs/
+*.pkl
+*.csv
+__pycache__/
+.venv/
+myenv/
+.git/
+*.ipynb
