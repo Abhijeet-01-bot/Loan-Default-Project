@@ -25,6 +25,23 @@ DEPLOYMENT_NAME=
 VM_SIZE=
 ```
 
+## Notes 
+
+- Ensure Azure CLI is installed and authenticated:
+  
+```bash
+az login
+```
+
+#### Windows
+For Windows users, use PowerShell and ensure Azure CLI is installed via:
+```powershell
+choco install azure-cli
+```
+or download from https://aka.ms/installazurecliwindows
+
+- Make sure all environment variables are correctly configured before running the scripts.
+
 ---
 
 ## Project Setup
@@ -91,14 +108,5 @@ This script:
 
 ---
 
-## Notes
-
-- Ensure Azure CLI is installed and authenticated:
-  
-```bash
-az login
-```
-
-- Make sure all environment variables are correctly configured before running the scripts.
 
 - Run the scripts in the exact order mentioned above.
