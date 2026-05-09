@@ -42,15 +42,23 @@ from sklearn.metrics import (
     ConfusionMatrixDisplay,
 )
 
-from config import (
-    SUBSCRIPTION_ID,
-    RESOURCE_GROUP,
-    WORKSPACE_NAME,
-    EXPERIMENT_NAME,
-    DATA_FILE,
-    MODEL_NAME,
-)
+from dotenv import load_dotenv
+import os
 
+load_dotenv()
+
+
+SUBSCRIPTION_ID = os.getenv('SUBSCRIPTION_ID')
+RESOURCE_GROUP = os.getenv('RESOURCE_GROUP')
+WORKSPACE_NAME = os.getenv('WORKSPACE_NAME')
+LOCATION = os.getenv('LOCATION')
+COMPUTE_NAME = os.getenv('COMPUTE_NAME')
+VM_SIZE = os.getenv('VM_SIZE')
+MODEL_NAME = os.getenv('MODEL_NAME')
+ENDPOINT_NAME = os.getenv('ENDPOINT_NAME')
+DEPLOYMENT_NAME = os.getenv('DEPLOYMENT_NAME')
+DATA_FILE = os.getenv('DATA_FILE')
+EXPERIMENT_NAME = os.getenv('EXPERIMENT_NAME')
 
 # =========================================================
 # AUTH

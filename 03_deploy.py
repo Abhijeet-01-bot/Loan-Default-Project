@@ -10,14 +10,21 @@ from azure.ai.ml.entities import (
     Environment,
     CodeConfiguration,
 )
-from config import (
-    SUBSCRIPTION_ID,
-    RESOURCE_GROUP,
-    WORKSPACE_NAME,
-    MODEL_NAME,
-    ENDPOINT_NAME,
-    DEPLOYMENT_NAME,
-)
+from dotenv import load_dotenv
+import os
+
+load_dotenv()
+
+
+SUBSCRIPTION_ID = os.getenv('SUBSCRIPTION_ID')
+RESOURCE_GROUP = os.getenv('RESOURCE_GROUP')
+WORKSPACE_NAME = os.getenv('WORKSPACE_NAME')
+LOCATION = os.getenv('LOCATION')
+COMPUTE_NAME = os.getenv('COMPUTE_NAME')
+VM_SIZE = os.getenv('VM_SIZE')
+MODEL_NAME = os.getenv('MODEL_NAME')
+ENDPOINT_NAME = os.getenv('ENDPOINT_NAME')
+DEPLOYMENT_NAME = os.getenv('DEPLOYMENT_NAME')
 
 
 def get_credential():
