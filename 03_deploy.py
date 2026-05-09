@@ -119,7 +119,7 @@ def main():
 
     endpoint = ml_client.online_endpoints.get(ENDPOINT_NAME)
     endpoint.traffic = {DEPLOYMENT_NAME: 100}
-    ml_client.online_endpoints.begin_create_or_update(endpoint).result()
+    ml_client.online_endpoints.begin_create_or_update(endpoint)
 
     print("Traffic updated.")
     print("Endpoint name:", ENDPOINT_NAME)
