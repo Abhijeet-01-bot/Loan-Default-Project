@@ -3,7 +3,7 @@ import sys
 import mlflow
 import mlflow.sklearn
 
-# ✅ Fix path for src imports
+# ✅ Fix import path for src modules
 sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), '..', 'src')))
 
 from ingest import load_data
@@ -14,13 +14,18 @@ from sklearn.naive_bayes import GaussianNB
 from sklearn.metrics import accuracy_score
 
 
-# ✅ CRITICAL FIX: Use local folder (no permission issue)
-mlflow.set_tracking_uri("file:./mlruns")
+# ✅ ✅ CRITICAL FIX (WORKS IN AZURE + GITHUB ACTIONS)
+# Force MLflow to use local directory instead of restricted cloud paths
+
+TRACKING_DIR = os.path.abspath("./mlruns")
+os.makedirs(TRACKING_DIR, exist_ok=True)
+
+mlflow.set_tracking_uri(f"file://{TRACKING_DIR}")
 
 
 def run_mlflow():
 
-    # ✅ Load data
+    # ✅ Load dataset
     df = load_data()
 
     # ✅ Split data
@@ -42,7 +47,7 @@ def run_mlflow():
         # ✅ Predict
         preds = model.predict(X_test)
 
-        # ✅ Calculate accuracy
+        # ✅ Accuracy
         acc = accuracy_score(y_test, preds)
 
         # ✅ Log parameters
@@ -51,10 +56,10 @@ def run_mlflow():
         # ✅ Log metrics
         mlflow.log_metric("accuracy", acc)
 
-        # ✅ SAVE MODEL (FIXED — no permission issue)
+        # ✅ SAVE MODEL (UPDATED SYNTAX — NO DEPRECATION ISSUE)
         mlflow.sklearn.log_model(
             sk_model=model,
-            artifact_path="model"
+            name="model"   # ✅ IMPORTANT (instead of artifact_path)
         )
 
         print("✅ MLflow run logged successfully")
