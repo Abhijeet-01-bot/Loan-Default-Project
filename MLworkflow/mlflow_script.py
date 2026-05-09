@@ -3,7 +3,7 @@ import sys
 import mlflow
 import mlflow.sklearn
 
-# ✅ Fix import path for src modules
+# ✅ Fix imports
 sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), '..', 'src')))
 
 from ingest import load_data
@@ -14,52 +14,42 @@ from sklearn.naive_bayes import GaussianNB
 from sklearn.metrics import accuracy_score
 
 
-# ✅ ✅ CRITICAL FIX (WORKS IN AZURE + GITHUB ACTIONS)
-# Force MLflow to use local directory instead of restricted cloud paths
-
+# ✅ FIX 1: Safe tracking directory
 TRACKING_DIR = os.path.abspath("./mlruns")
 os.makedirs(TRACKING_DIR, exist_ok=True)
 
 mlflow.set_tracking_uri(f"file://{TRACKING_DIR}")
 
+# ✅ ✅ FIX 2: CREATE OR SET EXPERIMENT (CRITICAL)
+mlflow.set_experiment("Loan-Default-Experiment")
+
 
 def run_mlflow():
 
-    # ✅ Load dataset
     df = load_data()
 
-    # ✅ Split data
     train_df, test_df = train_test_split(
         df, test_size=0.2, random_state=42
     )
 
-    # ✅ Preprocess
     X_train, y_train, encoders = preprocess_train(train_df)
     X_test, y_test = preprocess_test(test_df, encoders)
 
-    # ✅ Start MLflow run
     with mlflow.start_run():
 
-        # ✅ Train model
         model = GaussianNB()
         model.fit(X_train, y_train)
 
-        # ✅ Predict
         preds = model.predict(X_test)
-
-        # ✅ Accuracy
         acc = accuracy_score(y_test, preds)
 
-        # ✅ Log parameters
         mlflow.log_param("model", "NaiveBayes")
-
-        # ✅ Log metrics
         mlflow.log_metric("accuracy", acc)
 
-        # ✅ SAVE MODEL (UPDATED SYNTAX — NO DEPRECATION ISSUE)
+        # ✅ Save model (modern syntax)
         mlflow.sklearn.log_model(
             sk_model=model,
-            name="model"   # ✅ IMPORTANT (instead of artifact_path)
+            name="model"
         )
 
         print("✅ MLflow run logged successfully")
