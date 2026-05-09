@@ -20,6 +20,11 @@ jobs:
 
       - name: Install Requirements
         run: pip install -r requirements.txt
+      
+      - name: Azure Login
+        uses: azure/login@v2
+        with:
+          creds: ${{ secrets.AZURE_CREDENTIALS }} 
 
       - name: Run Azure Setup
         run: python 01_setup_azure.py
