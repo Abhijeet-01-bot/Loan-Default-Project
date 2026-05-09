@@ -5,7 +5,7 @@ on:
     branches: [ main ]
 
 jobs:
-  build-and-deploy:
+  build-and-train:
     runs-on: ubuntu-latest
 
     steps:
@@ -21,16 +21,6 @@ jobs:
       run: |
         pip install -r requirements.txt
 
-    - name: Run training
+    - name: Run MLflow training
       run: |
         python MLworkflow/mlflow_script.py
-
-    # Optional: Deployment Step
-    - name: Azure Login
-      uses: azure/login@v1
-      with:
-        creds: ${{ secrets.AZURE_CREDENTIALS }}
-
-    - name: Deploy model (placeholder)
-      run: |
-        echo "Deploy via Azure ML CLI or SDK"
