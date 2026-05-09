@@ -30,7 +30,7 @@ def get_credential():
 
 def main():
     credential = get_credential()
-
+    
     # MLClient without workspace first, because workspace may not exist yet
     ml_client = MLClient(
         credential=credential,
